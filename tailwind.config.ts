@@ -1,7 +1,8 @@
 import type { Config } from "tailwindcss";
+import defaultTheme from 'tailwindcss/defaultTheme';
 
 export default {
-	darkMode: ["class"],
+	// darkMode: ["class"], /* Removed as PRD does not specify dark mode and .dark styles were removed from CSS */
 	content: [
 		"./pages/**/*.{ts,tsx}",
 		"./components/**/*.{ts,tsx}",
@@ -10,7 +11,7 @@ export default {
 	],
 	prefix: "",
 	theme: {
-		container: {
+		container: { // Preserved from original as PRD doesn't specify container changes
 			center: true,
 			padding: '2rem',
 			screens: {
@@ -53,22 +54,19 @@ export default {
 					foreground: 'hsl(var(--card-foreground))'
 				},
 				sidebar: {
-					DEFAULT: 'hsl(var(--sidebar-background))',
-					foreground: 'hsl(var(--sidebar-foreground))',
-					primary: 'hsl(var(--sidebar-primary))',
-					'primary-foreground': 'hsl(var(--sidebar-primary-foreground))',
-					accent: 'hsl(var(--sidebar-accent))',
-					'accent-foreground': 'hsl(var(--sidebar-accent-foreground))',
-					border: 'hsl(var(--sidebar-border))',
-					ring: 'hsl(var(--sidebar-ring))'
+					DEFAULT: 'hsl(var(--sidebar-background))'
+                  /* Other properties (foreground, primary, accent, border, ring for sidebar) removed as PRD only specifies sidebar background color */
 				}
 			},
-			borderRadius: {
+			borderRadius: { // Shadcn UI standard setup, var(--radius) is now 0.375rem based on PRD
 				lg: 'var(--radius)',
 				md: 'calc(var(--radius) - 2px)',
 				sm: 'calc(var(--radius) - 4px)'
 			},
-			keyframes: {
+      fontFamily: {
+        sans: ['Nunito', ...defaultTheme.fontFamily.sans], // Set Nunito as primary sans-serif font as per PRD
+      },
+			keyframes: { // Preserved from original as PRD doesn't specify animation changes
 				'accordion-down': {
 					from: {
 						height: '0'
@@ -86,11 +84,11 @@ export default {
 					}
 				}
 			},
-			animation: {
+			animation: { // Preserved from original
 				'accordion-down': 'accordion-down 0.2s ease-out',
 				'accordion-up': 'accordion-up 0.2s ease-out'
 			}
 		}
 	},
-	plugins: [require("tailwindcss-animate")],
+	plugins: [require("tailwindcss-animate")], // Preserved from original
 } satisfies Config;
