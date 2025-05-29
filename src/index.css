@@ -2,100 +2,58 @@
 @tailwind components;
 @tailwind utilities;
 
+@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap');
+
 @layer base {
   :root {
-    --background: 0 0% 100%;
-    --foreground: 222.2 84% 4.9%;
+    --background: 240 17% 96%; /* PRD #F3F3F9 */
+    --foreground: 210 10% 15%; /* PRD #212529 primaryText */
 
-    --card: 0 0% 100%;
-    --card-foreground: 222.2 84% 4.9%;
+    --muted: 220 15% 94%; /* Custom light gray, derived for muted states */
+    --muted-foreground: 215 10% 46%; /* PRD #6B7280 secondaryText */
 
-    --popover: 0 0% 100%;
-    --popover-foreground: 222.2 84% 4.9%;
+    --popover: 0 0% 100%; /* PRD #FFFFFF surface */
+    --popover-foreground: 210 10% 15%; /* PRD #212529 primaryText */
 
-    --primary: 222.2 47.4% 11.2%;
-    --primary-foreground: 210 40% 98%;
+    --card: 0 0% 100%; /* PRD #FFFFFF surface */
+    --card-foreground: 210 10% 15%; /* PRD #212529 primaryText */
 
-    --secondary: 210 40% 96.1%;
-    --secondary-foreground: 222.2 47.4% 11.2%;
+    --border: 210 14% 92%; /* PRD #E9EBEC */
+    --input: 210 14% 92%; /* PRD #E9EBEC (same as border) */
 
-    --muted: 210 40% 96.1%;
-    --muted-foreground: 215.4 16.3% 46.9%;
+    --primary: 201 71% 51%; /* PRD #299CDB accentBlue */
+    --primary-foreground: 210 40% 98%; /* Light text for contrast, e.g., #F8F9FA */
 
-    --accent: 210 40% 96.1%;
-    --accent-foreground: 222.2 47.4% 11.2%;
+    --secondary: 171 89% 37%; /* PRD #0AB39C accentTeal */
+    --secondary-foreground: 210 40% 98%; /* Light text for contrast, e.g., #F8F9FA */
 
-    --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 210 40% 98%;
+    --accent: 10 86% 61%; /* PRD #F06548 accentRed */
+    --accent-foreground: 210 40% 98%; /* Light text for contrast, e.g., #F8F9FA */
 
-    --border: 214.3 31.8% 91.4%;
-    --input: 214.3 31.8% 91.4%;
-    --ring: 222.2 84% 4.9%;
+    --destructive: 10 86% 61%; /* PRD #F06548 accentRed (can be same as accent for destructive actions) */
+    --destructive-foreground: 210 40% 98%; /* Light text for contrast, e.g., #F8F9FA */
 
-    --radius: 0.5rem;
+    --ring: 201 71% 51%; /* PRD #299CDB accentBlue (for focus rings) */
+    
+    --radius: 0.375rem; /* PRD borderRadius.default is 'rounded-md', which is 0.375rem */
 
-    --sidebar-background: 0 0% 98%;
-
-    --sidebar-foreground: 240 5.3% 26.1%;
-
-    --sidebar-primary: 240 5.9% 10%;
-
-    --sidebar-primary-foreground: 0 0% 98%;
-
-    --sidebar-accent: 240 4.8% 95.9%;
-
-    --sidebar-accent-foreground: 240 5.9% 10%;
-
-    --sidebar-border: 220 13% 91%;
-
-    --sidebar-ring: 217.2 91.2% 59.8%;
+    /* Specific variable for PRD sidebar background */
+    --sidebar-background: 234 16% 85%; /* PRD #D3D4DF designSystem.colorPalette.sidebar */
+    /* Other --sidebar- prefixed variables from original file (foreground, primary, accent, border, ring for sidebar) are removed as they are not specified in the PRD */
   }
 
-  .dark {
-    --background: 222.2 84% 4.9%;
-    --foreground: 210 40% 98%;
-
-    --card: 222.2 84% 4.9%;
-    --card-foreground: 210 40% 98%;
-
-    --popover: 222.2 84% 4.9%;
-    --popover-foreground: 210 40% 98%;
-
-    --primary: 210 40% 98%;
-    --primary-foreground: 222.2 47.4% 11.2%;
-
-    --secondary: 217.2 32.6% 17.5%;
-    --secondary-foreground: 210 40% 98%;
-
-    --muted: 217.2 32.6% 17.5%;
-    --muted-foreground: 215 20.2% 65.1%;
-
-    --accent: 217.2 32.6% 17.5%;
-    --accent-foreground: 210 40% 98%;
-
-    --destructive: 0 62.8% 30.6%;
-    --destructive-foreground: 210 40% 98%;
-
-    --border: 217.2 32.6% 17.5%;
-    --input: 217.2 32.6% 17.5%;
-    --ring: 212.7 26.8% 83.9%;
-    --sidebar-background: 240 5.9% 10%;
-    --sidebar-foreground: 240 4.8% 95.9%;
-    --sidebar-primary: 224.3 76.3% 48%;
-    --sidebar-primary-foreground: 0 0% 100%;
-    --sidebar-accent: 240 3.7% 15.9%;
-    --sidebar-accent-foreground: 240 4.8% 95.9%;
-    --sidebar-border: 240 3.7% 15.9%;
-    --sidebar-ring: 217.2 91.2% 59.8%;
-  }
+  /* Removed .dark block as PRD doesn't specify dark mode */
 }
 
 @layer base {
   * {
-    @apply border-border;
+    @apply border-border; /* This will use 'hsl(var(--border))' through Tailwind config */
   }
 
   body {
-    @apply bg-background text-foreground;
+    @apply bg-background text-foreground; /* These will use 'hsl(var(--background))' and 'hsl(var(--foreground))' */
+    /* font-family is applied via Tailwind's base styles, which will use the 'sans' stack configured in tailwind.config.ts to include 'Nunito' */
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
   }
 }
