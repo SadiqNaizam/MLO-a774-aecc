@@ -1,14 +1,34 @@
-// Update this page (the content is just a fallback if you fail to update the page)
+import React from 'react';
+import MainAppLayout from '@/components/layout/MainAppLayout';
+import StatCardGrid from '@/components/Dashboard/StatCardGrid';
+import ChartCard from '@/components/Dashboard/ChartCard';
+import DataGrid from '@/components/Dashboard/DataGrid';
 
-const Index = () => {
+/**
+ * LeadsTrackingPage
+ * 
+ * This page represents the "Dashboard - Leads Tracking" view.
+ * It utilizes the MainAppLayout to provide the overall page structure (sidebar, header)
+ * and renders the core dashboard components: StatCardGrid, ChartCard, and DataGrid
+ * in the main content area.
+ * 
+ * The title "Dashboard" is passed to the MainAppLayout, which in turn sets it in the TopHeader.
+ * The individual dashboard components (StatCardGrid, ChartCard, DataGrid) are responsible
+ * for their own data fetching/management and internal layout as per their definitions.
+ */
+const LeadsTrackingPage: React.FC = () => {
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-100">
-      <div className="text-center">
-        <h1 className="text-4xl font-bold mb-4">Welcome to Your Blank App</h1>
-        <p className="text-xl text-gray-600">Start building your amazing project here!</p>
-      </div>
-    </div>
+    <MainAppLayout title="Dashboard">
+      {/* 
+        The MainAppLayout's structure inherently places these components
+        within a 'main' element that has padding, and an inner div
+        with 'flex flex-col gap-6' for vertical stacking and spacing.
+      */}
+      <StatCardGrid />
+      <ChartCard />
+      <DataGrid />
+    </MainAppLayout>
   );
 };
 
-export default Index;
+export default LeadsTrackingPage;
